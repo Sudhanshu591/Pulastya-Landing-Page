@@ -182,7 +182,7 @@
       for (var i = 0; i < count; i++) {
         ctx.beginPath();
         ctx.arc(rand() * w, rand() * h, rand() * 1.1 + 0.2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(220,230,255," + (rand() * 0.55 + 0.15).toFixed(3) + ")";
+        ctx.fillStyle = "rgba(47,127,232," + (rand() * 0.3 + 0.08).toFixed(3) + ")";
         ctx.fill();
       }
     }
