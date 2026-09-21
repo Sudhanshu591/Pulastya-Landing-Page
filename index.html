@@ -209,7 +209,8 @@
       <div class="tabs-card cap" data-tabs data-feature-panel>
         <div class="tabs-card__left cap__nav">
           <div class="tab-list cap__tabs" role="tablist" aria-label="Pulastya capabilities" aria-orientation="vertical">
-            <button class="tab cap__tab" role="tab" id="tab-voice" aria-controls="panel-voice" aria-selected="true"><span class="cap__tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10M21 12h0"/></svg></span>Voice and routing</button>
+            <button class="tab cap__tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true"><span class="cap__tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg></span>Full overview</button>
+            <button class="tab cap__tab" role="tab" id="tab-voice" aria-controls="panel-voice" aria-selected="false" tabindex="-1"><span class="cap__tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10M21 12h0"/></svg></span>Voice and routing</button>
             <button class="tab cap__tab" role="tab" id="tab-knowledge" aria-controls="panel-knowledge" aria-selected="false" tabindex="-1"><span class="cap__tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg></span>Knowledge base</button>
             <button class="tab cap__tab" role="tab" id="tab-prompts" aria-controls="panel-prompts" aria-selected="false" tabindex="-1"><span class="cap__tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h10M4 18h7"/><path d="m17 15 3 3-3 3"/></svg></span>Prompt templates</button>
             <button class="tab cap__tab" role="tab" id="tab-calls" aria-controls="panel-calls" aria-selected="false" tabindex="-1"><span class="cap__tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span>Live calls and history</button>
@@ -223,7 +224,18 @@
           </div>
         </div>
         <div class="cap__panels">
-          <div class="cap-panel is-active" role="tabpanel" id="panel-voice" aria-labelledby="tab-voice" tabindex="0">
+          <div class="cap-panel is-active" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+            <!-- IMAGE SLOT: replace the whole .cap-panel__media block below with the overview screenshot, e.g.
+                 <div class="cap-panel__media"><img src="/assets/img/product/overview.webp" alt="Full overview of the Pulastya workspace" width="1200" height="490" loading="lazy" decoding="async"></div> -->
+            <div class="cap-panel__media cap-panel__media--slot" data-image-slot>
+              <p>Full overview of Pulastya<span>Image slot &middot; 1200 &times; 490</span></p>
+            </div>
+            <div class="cap-panel__body">
+              <h3>Full overview of Pulastya</h3>
+              <p>One view of the Pulastya workspace, with the parts covered in the tabs below: voice and routing, knowledge, prompt templates, calls and handoff.</p>
+            </div>
+          </div>
+          <div class="cap-panel" role="tabpanel" id="panel-voice" aria-labelledby="tab-voice" tabindex="0">
             <div class="cap-panel__media"><img src="/assets/img/product/voice.webp" alt="Pulastya Voice screen with Twilio Polly, OpenAI TTS and ElevenLabs provider options and a grid of English voices" width="1200" height="490" loading="lazy" decoding="async"></div>
             <div class="cap-panel__body">
               <h3>Choose the voice and the telephony provider</h3>
