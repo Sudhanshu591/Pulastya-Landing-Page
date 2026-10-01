@@ -110,6 +110,67 @@
     activate(initial < 0 ? 0 : initial);
   });
 
+  /* ---- Industries carousel: a seamless loop that drifts on its own ----
+     The card set is cloned once; when the row has scrolled one full set it jumps back by
+     that width, which looks identical. Hover, focus, touch or an arrow click pauses the
+     drift, and it resumes from wherever the visitor left it. */
+  $$("[data-ind-rail]").forEach(function (rail) {
+    var list = $(".ind-list", rail);
+    var section = rail.closest("section");
+    var prev = section && $("[data-ind-prev]", section);
+    var next = section && $("[data-ind-next]", section);
+    if (!list) return;
+    var originals = $$(".ind-card", list);
+    originals.forEach(function (card) {
+      var clone = card.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      clone.setAttribute("inert", "");
+      // Copies are decorative: swap their headings for plain text so the outline lists each industry once.
+      $$("h3", clone).forEach(function (h) {
+        var d = document.createElement("p");
+        d.className = "ind-card__title";
+        d.innerHTML = h.innerHTML;
+        h.replaceWith(d);
+      });
+      list.appendChild(clone);
+    });
+    var SPEED = 40; // px per second
+    var pos = 0, last = 0, hold = 0, hover = false, visible = true;
+    function setWidth() { return originals.length ? list.children[originals.length].offsetLeft - originals[0].offsetLeft : 0; }
+    function wrap(x) { var w = setWidth(); if (!w) return x; while (x >= w) x -= w; while (x < 0) x += w; return x; }
+    function step() { var c = originals[0]; return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(list).columnGap || 0) : 300; }
+    function nudge(dir) {
+      hold = performance.now() + 4000;
+      pos = wrap(list.scrollLeft);
+      list.scrollLeft = pos;
+      list.scrollBy({ left: dir * step(), behavior: prefersReduced ? "auto" : "smooth" });
+    }
+    if (prev) prev.addEventListener("click", function () { nudge(-1); });
+    if (next) next.addEventListener("click", function () { nudge(1); });
+    if (prefersReduced) return;
+    list.addEventListener("mouseenter", function () { hover = true; });
+    list.addEventListener("mouseleave", function () { hover = false; });
+    list.addEventListener("focusin", function () { hover = true; });
+    list.addEventListener("focusout", function () { hover = false; });
+    list.addEventListener("touchstart", function () { hold = performance.now() + 4000; }, { passive: true });
+    list.addEventListener("wheel", function () { hold = performance.now() + 2500; }, { passive: true });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }).observe(list);
+    }
+    function tick(now) {
+      var dt = last ? Math.min(now - last, 64) : 0;
+      last = now;
+      if (!visible || hover || now < hold) {
+        pos = list.scrollLeft; // follow manual scrolling so the drift resumes from there
+      } else {
+        pos = wrap(pos + SPEED * dt / 1000);
+        list.scrollLeft = pos;
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+
   /* ---- Accordion (height animates via CSS grid rows; no display toggling) ---- */
   var refreshTimer;
   $$(".acc").forEach(function (item) {
