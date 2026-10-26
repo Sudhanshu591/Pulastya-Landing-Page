@@ -550,8 +550,10 @@ ul, ol { padding: 0; list-style: none; }
 .footer__contact { margin-top: 1.125rem !important; }
 .footer__contact a { color: var(--text-80); text-decoration: underline; text-underline-offset: 0.1875rem; }
 .footer__brand p { margin-top: 1.875rem; color: var(--text-60); max-width: 30ch; }
-.footer__badge { display: inline-block; margin-top: 1.5rem; }
-.footer__badge img { display: block; width: 171px; height: 54px; }
+.footer__badges { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 2rem; max-width: 34rem; }
+.footer__badges a { display: block; transition: translate .25s var(--ease-out); }
+.footer__badges a:hover { translate: 0 -2px; }
+.footer__badges img { display: block; width: auto; max-width: 100%; height: 2.5rem; }
 .socials { display: flex; gap: 0.625rem; margin-top: 2.5rem; }
 .socials a { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; background: var(--surface-3); color: var(--text-60); transition: background-color .25s, color .25s, translate .25s var(--ease-out); }
 .socials a:hover { background: var(--blue-600); color: #fff; translate: 0 -2px; }
